@@ -13,6 +13,9 @@ public class Race
     private Horse lane1Horse;
     private Horse lane2Horse;
     private Horse lane3Horse;
+    private Horse lane4Horse;
+    private Horse lane5Horse;
+    private final int MAX_LANES = 5;
     private final int MAX_DISTANCE = 30;
     private final int MIN_DISTANCE = 10;
 
@@ -45,6 +48,8 @@ public class Race
         lane1Horse = null;
         lane2Horse = null;
         lane3Horse = null;
+        lane4Horse = null;
+        lane5Horse = null;
     }
     
     /**
@@ -67,6 +72,14 @@ public class Race
         {
             lane3Horse = theHorse;
         }
+        else if (laneNumber == 4)
+        {
+            lane4Horse = theHorse;
+        }
+        else if (laneNumber == 5)
+        {
+            lane5Horse = theHorse;
+        }
         else
         {
             System.out.println("Cannot add horse to lane " + laneNumber + " because there is no such lane");
@@ -85,38 +98,51 @@ public class Race
         boolean finished = false;
         
         //reset all the lanes (all horses not fallen and back to 0). 
-        lane1Horse.goBackToStart();
-        lane2Horse.goBackToStart();
-        lane3Horse.goBackToStart();
+        if (lane1Horse != null) lane1Horse.goBackToStart();
+        if (lane2Horse != null) lane2Horse.goBackToStart();
+        if (lane3Horse != null) lane3Horse.goBackToStart();
+        if (lane4Horse != null) lane4Horse.goBackToStart();
+        if (lane5Horse != null) lane5Horse.goBackToStart();
                       
         while (!finished)
         {
-            //move each horse
-            moveHorse(lane1Horse);
-            moveHorse(lane2Horse);
-            moveHorse(lane3Horse);
+            //move each horse that are not null
+            
+            if (lane1Horse != null) moveHorse(lane1Horse);
+            if (lane2Horse != null) moveHorse(lane2Horse);
+            if (lane3Horse != null) moveHorse(lane3Horse);
+            if (lane4Horse != null) moveHorse(lane4Horse);
+            if (lane5Horse != null) moveHorse(lane5Horse);
                         
             //print the race positions
             printRace();
-            
-            //if any of the three horses has won the race is finished
-            if ( raceWonBy(lane1Horse) || raceWonBy(lane2Horse) || raceWonBy(lane3Horse) )
+
+            if(lane1Horse !=null && raceWonBy(lane1Horse))
             {
-
                 finished = true;
-                if (raceWonBy(lane1Horse))
-                {
-                    System.out.println( "And the winner is "+ lane1Horse.getName() +"!");
-                }else if (raceWonBy(lane2Horse))
-                {
-                    System.out.println( "And the winner is "+ lane2Horse.getName() +"!");
-                }else if (raceWonBy(lane3Horse))
-                {
-                    System.out.println( "And the winner is "+ lane3Horse.getName() +"!");
-                }
-
-
-            }else if (lane1Horse.hasFallen() && lane2Horse.hasFallen() && lane3Horse.hasFallen())
+                System.out.println( "And the winner is "+ lane1Horse.getName() +"!");
+            }
+            else if(lane2Horse !=null && raceWonBy(lane2Horse))
+            {
+                finished = true;
+                System.out.println( "And the winner is "+ lane2Horse.getName() +"!");
+            }
+            else if(lane3Horse !=null && raceWonBy(lane3Horse))
+            {
+                finished = true;
+                System.out.println( "And the winner is "+ lane3Horse.getName() +"!");
+            }
+            else if(lane4Horse !=null && raceWonBy(lane4Horse))
+            {
+                finished = true;
+                System.out.println( "And the winner is "+ lane4Horse.getName() +"!");
+            }
+            else if(lane5Horse !=null && raceWonBy(lane5Horse))
+            {
+                finished = true;
+                System.out.println( "And the winner is "+ lane5Horse.getName() +"!");
+            }           
+            else if (allFallen())
             {
                 finished = true;
                 System.out.println("All horses have fallen!");
@@ -188,14 +214,30 @@ public class Race
         multiplePrint('=',raceLength+3); //top edge of track
         System.out.println();
         
-        printLane(lane1Horse);
-        System.out.println();
+        if (lane1Horse != null) {
+            printLane(lane1Horse);
+            System.out.println();
+        }
         
-        printLane(lane2Horse);
-        System.out.println();
+        if (lane2Horse != null) {
+            printLane(lane2Horse);
+            System.out.println();
+        }
         
-        printLane(lane3Horse);
-        System.out.println();
+        if (lane3Horse != null) {
+            printLane(lane3Horse);
+            System.out.println();
+        }
+        
+        if (lane4Horse != null) {
+            printLane(lane4Horse);
+            System.out.println();
+        }
+        
+        if (lane5Horse != null) {
+            printLane(lane5Horse);
+            System.out.println();
+        }
         
         multiplePrint('=',raceLength+3); //bottom edge of track
         System.out.println();    
@@ -242,7 +284,7 @@ public class Race
             System.out.print(' ');
         }
 
-        System.err.print(theHorse.getName() + " (Current Confidence: "+ theHorse.getConfidence()+") " +" (Distance Travelled: "+ theHorse.getDistanceTravelled()+") ");
+        System.out.print(theHorse.getName() + " (Current Confidence: "+ theHorse.getConfidence()+") " +" (Distance Travelled: "+ theHorse.getDistanceTravelled()+") ");
 
     }
         
@@ -262,4 +304,22 @@ public class Race
             i = i + 1;
         }
     }
+
+    private boolean allFallen()
+    {
+        Horse[] horses = {lane1Horse, lane2Horse, lane3Horse, lane4Horse, lane5Horse};
+        for (Horse horse : horses)
+        {
+            if (horse != null && !horse.hasFallen())
+            {
+                return false; // At least one horse is not fallen
+            }
+
+        }
+        return true; // All horses have fallen
+
+
+    }
+
+
 }
