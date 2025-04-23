@@ -1,3 +1,4 @@
+import java.util.Scanner;
 
 /**
  * Write a description of class Horse here.
@@ -24,7 +25,7 @@ public class Horse
     {
         this.symbol = horseSymbol;
         this.name = horseName;
-        this.confidence = horseConfidence;
+        verifyConfidence(horseConfidence);
 
     }
     
@@ -79,6 +80,38 @@ public class Horse
     public void setSymbol(char newSymbol)
     {
         this.symbol = newSymbol;
+    }
+
+    private void verifyConfidence(double confidence)
+    {
+        boolean valid = false;
+        Scanner scanner = new Scanner(System.in);
+        double newConfidence = confidence;
+        while (!valid)
+        {
+            if (newConfidence >= 0 && newConfidence <= 1)
+            {
+                valid = true;
+            }
+            else
+            {
+                System.out.println("Please enter a number between 0 and 1: ");
+                
+                try
+                {
+                    newConfidence = scanner.nextDouble();
+                }
+                catch (Exception e)
+                {
+                    System.out.println("Invalid again!");
+                    // Set confidence to 2 if invalid input is given so that we can continue the loop correctly.
+                    scanner.next(); // Clear the invalid input
+
+                }
+            }
+        }
+        setConfidence(newConfidence);
+        
     }
     
 }

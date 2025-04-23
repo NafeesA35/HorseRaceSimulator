@@ -224,7 +224,7 @@ public class Race
             System.out.print(' ');
         }
 
-        System.err.print(theHorse.getName() + " (Current Confidence: "+ theHorse.getConfidence()+") ");
+        System.err.print(theHorse.getName() + " (Current Confidence: "+ theHorse.getConfidence()+") " );
 
     }
         
