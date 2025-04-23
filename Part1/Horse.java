@@ -87,6 +87,7 @@ public class Horse
         boolean valid = false;
         Scanner scanner = new Scanner(System.in);
         double newConfidence = confidence;
+        // Loop until a valid confidence value is entered
         while (!valid)
         {
             if (newConfidence >= 0 && newConfidence <= 1)
@@ -104,7 +105,6 @@ public class Horse
                 catch (Exception e)
                 {
                     System.out.println("Invalid again!");
-                    // Set confidence to 2 if invalid input is given so that we can continue the loop correctly.
                     scanner.next(); // Clear the invalid input
 
                 }

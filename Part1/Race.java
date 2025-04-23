@@ -13,6 +13,8 @@ public class Race
     private Horse lane1Horse;
     private Horse lane2Horse;
     private Horse lane3Horse;
+    private final int MAX_DISTANCE = 30;
+    private final int MIN_DISTANCE = 10;
 
     /**
      * Constructor for objects of class Race
@@ -22,8 +24,24 @@ public class Race
      */
     public Race(int distance)
     {
+        // If statements to ensure entered distance is not greater than the max distance or less than the min distance
+        if (distance > MAX_DISTANCE)
+        {
+            raceLength = MAX_DISTANCE;
+            System.out.println(" Your distance is too long, setting to max distance of " + MAX_DISTANCE + "m.");
+            System.out.println();
+
+        }else if(distance < MIN_DISTANCE)
+        {
+            raceLength = MIN_DISTANCE;
+            System.out.println(" Your distance is too short, setting to min distance of " + MIN_DISTANCE + "m.");
+
+        }else
+        {
+            raceLength = distance;
+        }
+
         // initialise instance variables
-        raceLength = distance;
         lane1Horse = null;
         lane2Horse = null;
         lane3Horse = null;
@@ -224,7 +242,7 @@ public class Race
             System.out.print(' ');
         }
 
-        System.err.print(theHorse.getName() + " (Current Confidence: "+ theHorse.getConfidence()+") " );
+        System.err.print(theHorse.getName() + " (Current Confidence: "+ theHorse.getConfidence()+") " +" (Distance Travelled: "+ theHorse.getDistanceTravelled()+") ");
 
     }
         
