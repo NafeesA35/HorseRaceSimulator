@@ -84,10 +84,24 @@ public class Race
             //if any of the three horses has won the race is finished
             if ( raceWonBy(lane1Horse) || raceWonBy(lane2Horse) || raceWonBy(lane3Horse) )
             {
+
                 finished = true;
+                if (raceWonBy(lane1Horse))
+                {
+                    System.out.println( "And the winner is "+ lane1Horse.getName() +"!");
+                }else if (raceWonBy(lane2Horse))
+                {
+                    System.out.println( "And the winner is "+ lane2Horse.getName() +"!");
+                }else if (raceWonBy(lane3Horse))
+                {
+                    System.out.println( "And the winner is "+ lane3Horse.getName() +"!");
+                }
+
+
             }else if (lane1Horse.hasFallen() && lane2Horse.hasFallen() && lane3Horse.hasFallen())
             {
                 finished = true;
+                System.out.println("All horses have fallen!");
             }
            
             //wait for 100 milliseconds
@@ -204,6 +218,14 @@ public class Race
         
         //print the | for the end of the track
         System.out.print('|');
+
+        for(int i = 0; i < 5; i++)
+        {
+            System.out.print(' ');
+        }
+
+        System.err.print(theHorse.getName() + " (Current Confidence: "+ theHorse.getConfidence()+") ");
+
     }
         
     
