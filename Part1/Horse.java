@@ -61,6 +61,8 @@ public class Horse
     public void goBackToStart()
     {
         this.distanceTravelled = 0;
+        // Allows the race to be repeated.
+        this.hasFallen = false;
     }
     
     public boolean hasFallen()
@@ -113,6 +115,15 @@ public class Horse
             }
         }
         setConfidence(newConfidence);
+    }
+
+    public void decreaseConfidence()
+    {
+        this.confidence = this.confidence - 0.05;
+    }
+    public void increaseConfidence()
+    {
+        this.confidence = this.confidence + 0.05;
     }
     
 }

@@ -104,7 +104,7 @@ public class Race
         if (lane3Horse != null) lane3Horse.goBackToStart();
         if (lane4Horse != null) lane4Horse.goBackToStart();
         if (lane5Horse != null) lane5Horse.goBackToStart();
-                      
+    
         while (!finished)
         {
             //move each horse that are not null
@@ -123,26 +123,31 @@ public class Race
             {
                 finished = true;
                 System.out.println( "And the winner is "+ lane1Horse.getName() +"!");
+                lane1Horse.increaseConfidence();
             }
             else if(lane2Horse !=null && raceWonBy(lane2Horse))
             {
                 finished = true;
                 System.out.println( "And the winner is "+ lane2Horse.getName() +"!");
+                lane2Horse.increaseConfidence();
             }
             else if(lane3Horse !=null && raceWonBy(lane3Horse))
             {
                 finished = true;
                 System.out.println( "And the winner is "+ lane3Horse.getName() +"!");
+                lane3Horse.increaseConfidence();
             }
             else if(lane4Horse !=null && raceWonBy(lane4Horse))
             {
                 finished = true;
                 System.out.println( "And the winner is "+ lane4Horse.getName() +"!");
+                lane4Horse.increaseConfidence();
             }
             else if(lane5Horse !=null && raceWonBy(lane5Horse))
             {
                 finished = true;
                 System.out.println( "And the winner is "+ lane5Horse.getName() +"!");
+                lane5Horse.increaseConfidence();
             }           
             else if (allFallen())
             {
@@ -183,6 +188,7 @@ public class Race
             {
 
                 theHorse.fall();
+                theHorse.decreaseConfidence();
 
             }
         }
