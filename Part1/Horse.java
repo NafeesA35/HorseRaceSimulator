@@ -1,9 +1,9 @@
 import java.util.Scanner;
 
 /**
- * Write a description of class Horse here.
+ * The horse class is a representation of a horse in the simulator, consisting of attributes such as name, symbol, confidence, distance travelled, and whether it has fallen.
  * 
- * @author (your name) 
+ * @author Nafees Ahmed
  * @version (a version number or a date)
  */
 public class Horse
@@ -32,11 +32,12 @@ public class Horse
     
     
     //Other methods of class Horse
+    // GETTERS - getConfidence, getDistanceTravelled, getName, getSymbol, hasFallen
+    // SETTERS - setConfidence, setSymbol, goBackToStart, moveForward, fall
     public void fall()
     {   
         this.hasFallen = true;
     }
-    
     public double getConfidence()
     {
         return this.confidence;
@@ -82,6 +83,7 @@ public class Horse
         this.symbol = newSymbol;
     }
 
+    
     private void verifyConfidence(double confidence)
     {
         boolean valid = false;
@@ -111,7 +113,6 @@ public class Horse
             }
         }
         setConfidence(newConfidence);
-        
     }
     
 }

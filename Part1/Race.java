@@ -58,6 +58,7 @@ public class Race
      * @param theHorse the horse to be added to the race
      * @param laneNumber the lane that the horse will be added to
      */
+    // Add horse to the specified lane
     public void addHorse(Horse theHorse, int laneNumber)
     {
         if (laneNumber == 1)
@@ -117,6 +118,7 @@ public class Race
             //print the race positions
             printRace();
 
+            // Series of if statemens checking if a non-null horse has won.
             if(lane1Horse !=null && raceWonBy(lane1Horse))
             {
                 finished = true;
@@ -214,6 +216,7 @@ public class Race
         multiplePrint('=',raceLength+3); //top edge of track
         System.out.println();
         
+        // Print the lanes for horses that are not null
         if (lane1Horse != null) {
             printLane(lane1Horse);
             System.out.println();
@@ -305,6 +308,7 @@ public class Race
         }
     }
 
+    //Check if all the horses have fallen - Used in the raceWonBy method
     private boolean allFallen()
     {
         Horse[] horses = {lane1Horse, lane2Horse, lane3Horse, lane4Horse, lane5Horse};
