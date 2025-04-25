@@ -1,3 +1,5 @@
+package Part1;
+
 import java.util.Scanner;
 
 /**
@@ -125,5 +127,6 @@ public class Horse
     {
         this.confidence = this.confidence + 0.05;
     }
+
     
 }
