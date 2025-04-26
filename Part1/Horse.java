@@ -16,7 +16,7 @@ public class Horse
     private double confidence;
     private int distanceTravelled;
     private boolean hasFallen;
-    private String breed;
+    private String breed = "Arabian"; // Default breed
     private String imagePath = "Part2/images/horse.png"; // Default image path
     
     

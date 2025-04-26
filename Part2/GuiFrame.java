@@ -92,14 +92,15 @@ class HorsePanel extends JPanel {
 public class GuiFrame extends JFrame implements ActionListener{
 
     
-    private JComboBox<String> comboBox;     
+    private JComboBox<String> comboBox, horsesComboBox, horse1Breed , horse2Breed, horse3Breed, horse4Breed, horse5Breed;     
     private JSlider distanceSlider;         
     private JButton submitButton;
-    private JComboBox<String> horsesComboBox;
-    private Horse[] horses; // Array to hold horse objects        
+    private Horse[] horses; // Array to hold horse objects
+    private String[] breeds = new String[5]; // Array to hold horse breeds        
 
-    public GuiFrame() {
+    public GuiFrame(Horse[] horses) {
         super("Horse Race Sim");
+        this.horses = horses;
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setSize(800, 600);
         this.setLayout(null);
@@ -166,7 +167,7 @@ public class GuiFrame extends JFrame implements ActionListener{
         horse1Label.setVisible(true);
 
         String[] breed = {"Arabian", "Mustang", "Friesian"};
-        JComboBox<String> horse1Breed = new JComboBox<>(breed);
+        horse1Breed = new JComboBox<>(breed);
         horse1Breed.setBounds(180, 255, 80, 20);
         this.add(horse1Breed);
 
@@ -176,7 +177,7 @@ public class GuiFrame extends JFrame implements ActionListener{
         this.add(horse2Label);
         horse2Label.setVisible(true);
 
-        JComboBox<String> horse2Breed = new JComboBox<>(breed);
+        horse2Breed = new JComboBox<>(breed);
         horse2Breed.setBounds(180, 285, 80, 20);
         this.add(horse2Breed);
         horse2Breed.setVisible(true);
@@ -187,7 +188,7 @@ public class GuiFrame extends JFrame implements ActionListener{
         this.add(horse3Label);
         horse3Label.setVisible(true);
 
-        JComboBox<String> horse3Breed = new JComboBox<>(breed);
+        horse3Breed = new JComboBox<>(breed);
         horse3Breed.setBounds(180, 315, 80, 20);
         this.add(horse3Breed);
         horse3Breed.setVisible(true);
@@ -196,7 +197,7 @@ public class GuiFrame extends JFrame implements ActionListener{
         this.add(horse4Label);
         horse4Label.setVisible(true);
 
-        JComboBox<String> horse4Breed = new JComboBox<>(breed);
+        horse4Breed = new JComboBox<>(breed);
         horse4Breed.setBounds(180, 345, 80, 20);
         this.add(horse4Breed);
         horse4Breed.setVisible(true);
@@ -206,7 +207,7 @@ public class GuiFrame extends JFrame implements ActionListener{
         this.add(horse5Label);
         horse5Label.setVisible(true);
 
-        JComboBox<String> horse5Breed = new JComboBox<>(breed);
+        horse5Breed = new JComboBox<>(breed);
         horse5Breed.setBounds(180, 375, 80, 20);
         this.add(horse5Breed);
         horse5Breed.setVisible(true);
@@ -227,13 +228,25 @@ public class GuiFrame extends JFrame implements ActionListener{
 
             int numHorses = Integer.parseInt((String) horsesComboBox.getSelectedItem());
             String weather = (String) comboBox.getSelectedItem(); 
-
-
             int distance = distanceSlider.getValue();
 
 
-            RaceFrame raceFrame = new RaceFrame(numHorses, weather, distance);
-            raceFrame.setVisible(true);
+            // Selected breeds
+            breeds[0] = (String) horse1Breed.getSelectedItem();
+            breeds[1] = (String) horse2Breed.getSelectedItem();
+            breeds[2] = (String) horse3Breed.getSelectedItem();
+            breeds[3] = (String) horse4Breed.getSelectedItem();
+            breeds[4] = (String) horse5Breed.getSelectedItem();
+
+            for (int i = 0; i < breeds.length && i < horses.length; i++) {
+                horses[i].setBreed(breeds[i]);
+            }
+
+
+
+
+            GameFrame gameFrame = new GameFrame(horses); // Create a new GameFrame instance
+            gameFrame.setVisible(true);
             this.dispose();
 
         }

@@ -1,9 +1,9 @@
 package Part2;
+import Part1.Horse;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.*;
-import Part1.Horse;
 
 
 class HorsePanel extends JPanel implements ActionListener
@@ -15,7 +15,6 @@ class HorsePanel extends JPanel implements ActionListener
     Image horseImage;
     Timer timer;
     int xSpeed = 5;
-    int ySpeed = 0;
     int startX = 0;
     int startY = 0;
 
