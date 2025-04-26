@@ -240,6 +240,7 @@ public class GuiFrame extends JFrame implements ActionListener{
 
             for (int i = 0; i < breeds.length && i < horses.length; i++) {
                 horses[i].setBreed(breeds[i]);
+                horses[i].setImagePath(breeds[i]);
             }
 
 

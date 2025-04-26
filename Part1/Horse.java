@@ -137,8 +137,20 @@ public class Horse
     {
         return this.breed;
     }
-    public void setImagePath(String imagePath)
+    public void setImagePath(String selected)
     {
+        if (selected.equals("Arabian"))
+        {
+            imagePath = "Part2/images/horse.png";
+        }
+        else if (selected.equals("Friesian"))
+        {
+            imagePath = "Part2/images/friesian.png";
+        }
+        else if (selected.equals("Mustang"))
+        {
+            imagePath = "Part2/images/mustang.png";
+        }
         this.imagePath = imagePath;
     }
     public String getImagePath()
