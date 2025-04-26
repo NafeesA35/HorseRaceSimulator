@@ -16,6 +16,8 @@ public class Horse
     private double confidence;
     private int distanceTravelled;
     private boolean hasFallen;
+    private String breed;
+    private String imagePath = "Part2/images/horse.png"; // Default image path
     
     
       
@@ -126,6 +128,22 @@ public class Horse
     public void increaseConfidence()
     {
         this.confidence = this.confidence + 0.05;
+    }
+    public void setBreed(String breed)
+    {
+        this.breed = breed;
+    }
+    public String getBreed()
+    {
+        return this.breed;
+    }
+    public void setImagePath(String imagePath)
+    {
+        this.imagePath = imagePath;
+    }
+    public String getImagePath()
+    {
+        return this.imagePath;
     }
 
     

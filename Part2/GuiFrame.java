@@ -1,5 +1,6 @@
 package Part2;
 
+import Part1.Horse;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.*;
@@ -94,7 +95,8 @@ public class GuiFrame extends JFrame implements ActionListener{
     private JComboBox<String> comboBox;     
     private JSlider distanceSlider;         
     private JButton submitButton;
-    private JComboBox<String> horsesComboBox;        
+    private JComboBox<String> horsesComboBox;
+    private Horse[] horses; // Array to hold horse objects        
 
     public GuiFrame() {
         super("Horse Race Sim");
@@ -141,10 +143,9 @@ public class GuiFrame extends JFrame implements ActionListener{
         this.add(distanceSlider);
         distanceSlider.setVisible(true);
 
-        JLabel distanceLabel = new JLabel("Select a race distance between 10 and 25 below:");
-        distanceLabel.setBounds(250, 100, 300, 30);
+        JLabel distanceLabel = createLabel("Select a race distance between 10 and 25 below:", 250, 100, 300, 30);
         this.add(distanceLabel);
-        this.setResizable(false);
+        
         distanceLabel.setVisible(true);
         // END - Distance
 
@@ -153,37 +154,69 @@ public class GuiFrame extends JFrame implements ActionListener{
         submitButton.setBounds(300, 500, 100, 30);  //
         this.add(submitButton);                     
         submitButton.addActionListener(this);
-        this.setVisible(true);
+
 
 
 
 
         // EVERYTHING ABOUT HORSES BELOW
 
-        JLabel horse1Label = new JLabel("Horse 1: Opio");
-        horse1Label.setBounds(30, 250, 200, 30);
+        JLabel horse1Label = createLabel("Horse 1: Opio :", 30, 250, 200, 30);
         this.add(horse1Label);
         horse1Label.setVisible(true);
 
-        JLabel horse2Label = new JLabel("Horse 2: Roach");
-        horse2Label.setBounds(30, 280, 200, 30);
+        String[] breed = {"Arabian", "Mustang", "Friesian"};
+        JComboBox<String> horse1Breed = new JComboBox<>(breed);
+        horse1Breed.setBounds(180, 255, 80, 20);
+        this.add(horse1Breed);
+
+
+
+        JLabel horse2Label = createLabel("Horse 2: Roach :", 30, 280, 200, 30);
         this.add(horse2Label);
         horse2Label.setVisible(true);
 
-        JLabel horse3Label = new JLabel("Horse 3: Pasta");
-        horse3Label.setBounds(30, 310, 200, 30);
+        JComboBox<String> horse2Breed = new JComboBox<>(breed);
+        horse2Breed.setBounds(180, 285, 80, 20);
+        this.add(horse2Breed);
+        horse2Breed.setVisible(true);
+
+        
+
+        JLabel horse3Label = createLabel("Horse 3: Pasta :", 30, 310, 200, 30);
         this.add(horse3Label);
         horse3Label.setVisible(true);
 
-        JLabel horse4Label = new JLabel("Horse 4: Khat");
-        horse4Label.setBounds(30, 340, 200, 30);
+        JComboBox<String> horse3Breed = new JComboBox<>(breed);
+        horse3Breed.setBounds(180, 315, 80, 20);
+        this.add(horse3Breed);
+        horse3Breed.setVisible(true);
+
+        JLabel horse4Label = createLabel("Horse 4: Khat :", 30, 340, 200, 30);
         this.add(horse4Label);
         horse4Label.setVisible(true);
 
-        JLabel horse5Label = new JLabel("Horse 5: Ty");
-        horse5Label.setBounds(30, 370, 200, 30);
+        JComboBox<String> horse4Breed = new JComboBox<>(breed);
+        horse4Breed.setBounds(180, 345, 80, 20);
+        this.add(horse4Breed);
+        horse4Breed.setVisible(true);
+        
+
+        JLabel horse5Label = createLabel("Horse 5: Ty: ", 30, 370, 200, 30);
         this.add(horse5Label);
         horse5Label.setVisible(true);
+
+        JComboBox<String> horse5Breed = new JComboBox<>(breed);
+        horse5Breed.setBounds(180, 375, 80, 20);
+        this.add(horse5Breed);
+        horse5Breed.setVisible(true);
+        
+
+
+
+
+        this.setResizable(false);
+        this.setVisible(true); // Make the frame visible
 
     }
 
@@ -204,6 +237,13 @@ public class GuiFrame extends JFrame implements ActionListener{
             this.dispose();
 
         }
+    }
+
+    public JLabel createLabel(String text, int x, int y , int width, int height) {
+        JLabel label = new JLabel(text);
+        label.setBounds(x, y, width, height);
+        label.setVisible(true);
+        return label;
     }
 }
 
