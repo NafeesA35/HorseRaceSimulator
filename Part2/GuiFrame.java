@@ -1,6 +1,7 @@
 package Part2;
 
 import Part1.Horse;
+import Part1.Race;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.*;
@@ -98,9 +99,11 @@ public class GuiFrame extends JFrame implements ActionListener{
     private Horse[] horses; // Array to hold horse objects
     private String[] breeds = new String[5]; // Array to hold horse breeds  
     private int sliderValue = 10;    
+    private Race race;
 
     public GuiFrame(Horse[] horses) {
         super("Horse Race Sim");
+        this.race = race;
         this.horses = horses;
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setSize(800, 600);
@@ -245,9 +248,49 @@ public class GuiFrame extends JFrame implements ActionListener{
             }
 
 
+            // ALL ABOUT SADDLES
+
+            JComboBox<String> saddle1 = saddleComboBox(300, 250, 100, 30);
+            this.add(saddle1);
+            saddle1.setVisible(true);
+            JLabel saddleLabel1 = createLabel("Saddle 1: ", 300, 250, 200, 30);
+            this.add(saddleLabel1);
+            saddleLabel1.setVisible(true);
+
+            JComboBox<String> saddle2 = saddleComboBox(300, 280, 100, 30);
+            this.add(saddle2);
+            saddle2.setVisible(true);
+            JLabel saddleLabel2 = createLabel("Saddle 2: ", 300, 280, 200, 30);
+            this.add(saddleLabel2);
+            saddleLabel2.setVisible(true);
+            
+            JComboBox<String> saddle3 = saddleComboBox(300, 310, 100, 30);
+            this.add(saddle3);
+            saddle3.setVisible(true);
+            JLabel saddleLabel3 = createLabel("Saddle 3: ", 300, 310, 200, 30);
+            this.add(saddleLabel3);
+            saddleLabel3.setVisible(true);
+
+            JComboBox<String> saddle4 = saddleComboBox(300, 340, 100, 30);
+            this.add(saddle4);
+            saddle4.setVisible(true);
+            JLabel saddleLabel4 = createLabel("Saddle 4: ", 300, 340, 200, 30);
+            this.add(saddleLabel4);
+            saddleLabel4.setVisible(true);
+
+            JComboBox<String> saddle5 = saddleComboBox(300, 370, 100, 30);
+            this.add(saddle5);
+            saddle5.setVisible(true);
+            JLabel saddleLabel5 = createLabel("Saddle 5: ", 300, 370, 200, 30);
+            this.add(saddleLabel5);
+            saddleLabel5.setVisible(true);
+
+            
 
 
-            GameFrame gameFrame = new GameFrame(horses , this.sliderValue); // Create a new GameFrame instance
+            this.race = new Race(this.sliderValue); // Create a new
+            race.setCondition(weather); // Set the weather condition
+            GameFrame gameFrame = new GameFrame(horses , this.race, numHorses); // Create a new GameFrame instance
             gameFrame.setVisible(true);
             this.dispose();
 
@@ -259,6 +302,22 @@ public class GuiFrame extends JFrame implements ActionListener{
         label.setBounds(x, y, width, height);
         label.setVisible(true);
         return label;
+    }
+
+    public JComboBox<String> saddleComboBox(int x, int y, int width, int height) {
+        JComboBox<String> comboBox = new JComboBox<>(new String[]{"N/A", "Brown", "Red"});
+        comboBox.setBounds(x, y, width, height);
+        comboBox.setVisible(true);
+        comboBox.setSelectedIndex(0);
+        return comboBox;
+    }
+
+    public JComboBox<String> shoeComboBox(int x, int y, int width, int height) {
+        JComboBox<String> comboBox = new JComboBox<>(new String[]{"N/A", "Brown", "Silver"});
+        comboBox.setBounds(x, y, width, height);
+        comboBox.setVisible(true);
+        comboBox.setSelectedIndex(0);
+        return comboBox;
     }
 }
 

@@ -16,7 +16,7 @@ public class Horse
     private double confidence;
     private int distanceTravelled;
     private boolean hasFallen;
-    private String breed = "Arabian"; // Default breed
+    private String breed = "Normal"; // Default breed
     private String imagePath = "Part2/images/horse.png"; // Default image path
     
     
@@ -123,11 +123,18 @@ public class Horse
 
     public void decreaseConfidence()
     {
-        this.confidence = this.confidence - 0.05;
+        if (this.confidence > 0.1)
+        {
+            this.confidence = this.confidence - 0.05;
+        }
     }
     public void increaseConfidence()
     {
-        this.confidence = this.confidence + 0.05;
+        if (this.confidence < 0.95)
+        {
+            this.confidence = this.confidence + 0.05;
+        }
+
     }
     public void setBreed(String breed)
     {
@@ -157,6 +164,24 @@ public class Horse
     {
         return this.imagePath;
     }
+
+    public void incrementOnBreed()
+    {
+        if(this.breed.equals("Arabian"))
+        {
+            this.distanceTravelled = this.distanceTravelled + 2;
+        }
+        else if(this.breed.equals("Friesian"))
+        {
+            this.confidence = this.confidence + 0.5;
+        }
+        else if(this.breed.equals("Mustang"))
+        {
+            this.confidence = this.confidence + 0.2;
+            this.distanceTravelled = this.distanceTravelled + 1;
+        }
+    }
+
 
     
 }
