@@ -1,12 +1,12 @@
 package Part1;
-
-import Part2.Gui;
-
+import Part2.GuiFrame;
+import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
 
 
+        //int distance = inputInt("Enter the race distance between 10 and 25 :");
         Race race = new Race(22);
         Horse horse = new Horse('■', "Opio", 0.5);
         Horse horse2 = new Horse('█', "Roach", 0.5);
@@ -24,10 +24,41 @@ public class Main {
         for (int i =0   ; i < 3; i++){
             race.startRace();
         }
+ 
+
         */
-        Gui gui = new Gui();
-        gui.startRaceGui(horses, 20 );
-        
+
+
+        new GuiFrame(horses);
+
+
+
+
+        /* 
+        GuiFrame gui = new GuiFrame();
+
+        */
+
+
+
+    }
+
+    public static int inputInt(String message) {
+        System.out.println(message);
+        Scanner scanner = new Scanner(System.in);
+        boolean valid = false;
+        int input = 0;
+        while (!valid) {
+            try {
+                input = scanner.nextInt();
+                System.out.println("You entered: " + input);
+                valid = true;
+            } catch (Exception e) {
+                System.out.println("You input MUST be an integer between 10 and 25: ");
+                scanner.next(); 
+            }
+        }
+        return input;
     }
 
 }

@@ -21,6 +21,7 @@ public class Race
     private final int MAX_LANES = 5;
     private final int MAX_DISTANCE = 30;
     private final int MIN_DISTANCE = 10;
+    private String condition = "Normal"; // Default condition
 
     /**
      * Constructor for objects of class Race
@@ -126,36 +127,52 @@ public class Race
             {
                 finished = true;
                 System.out.println( "And the winner is "+ lane1Horse.getName() +"!");
+                if(lane1Horse.hasFallen()){
+                    lane1Horse.increaseConfidence();
+                }
                 lane1Horse.increaseConfidence();
             }
             else if(lane2Horse !=null && raceWonBy(lane2Horse))
             {
                 finished = true;
                 System.out.println( "And the winner is "+ lane2Horse.getName() +"!");
+                if(lane2Horse.hasFallen()){
+                    lane2Horse.increaseConfidence();
+                }
                 lane2Horse.increaseConfidence();
             }
             else if(lane3Horse !=null && raceWonBy(lane3Horse))
             {
                 finished = true;
                 System.out.println( "And the winner is "+ lane3Horse.getName() +"!");
+                if(lane3Horse.hasFallen()){
+                    lane3Horse.increaseConfidence();
+                }
                 lane3Horse.increaseConfidence();
             }
             else if(lane4Horse !=null && raceWonBy(lane4Horse))
             {
                 finished = true;
                 System.out.println( "And the winner is "+ lane4Horse.getName() +"!");
+                if(lane4Horse.hasFallen()){
+                    lane4Horse.increaseConfidence();
+                }
                 lane4Horse.increaseConfidence();
             }
             else if(lane5Horse !=null && raceWonBy(lane5Horse))
             {
                 finished = true;
                 System.out.println( "And the winner is "+ lane5Horse.getName() +"!");
+                if(lane5Horse.hasFallen()){
+                    lane5Horse.increaseConfidence();
+                }
                 lane5Horse.increaseConfidence();
             }           
             else if (allFallen())
             {
                 finished = true;
                 System.out.println("All horses have fallen!");
+                
             }
            
             //wait for 100 milliseconds
@@ -172,7 +189,7 @@ public class Race
      * 
      * @param theHorse the horse to be moved
      */
-    private void moveHorse(Horse theHorse)
+    public void moveHorse(Horse theHorse)
     {
         //if the horse has fallen it cannot move, 
         //so only run if it has not fallen
@@ -187,13 +204,39 @@ public class Race
             //the probability that the horse will fall is very small (max is 0.1)
             //but will also will depends exponentially on confidence 
             //so if you double the confidence, the probability that it will fall is *2
-            if (Math.random() < (0.1*theHorse.getConfidence()*theHorse.getConfidence()))
+            double FALL_FACTOR = 0;
+            if(condition.equals("Rainy")){
+                FALL_FACTOR = 0.03;
+            }else if(condition.equals("Icy")){
+                FALL_FACTOR = 0.05;
+            }else if(condition.equals("Random")){
+                if(Math.random() < 0.33){
+                    FALL_FACTOR = 0.1;
+                }else if(Math.random() > 0.33 && Math.random() < 0.66){
+                    FALL_FACTOR = 0.05;
+                }else{
+                    FALL_FACTOR = 0.00;
+                }
+            }else{
+                FALL_FACTOR = 0;
+            }
+
+            double random = Math.random();
+
+            // Adding bonus endurance to decrease fall
+            if(random <= 0.2){
+                random = theHorse.getBonusEndurance() + random;
+            }
+
+            // Weather conditions increase the lieklihood of falling
+            if (random < ((0.1*theHorse.getConfidence()*theHorse.getConfidence()) + FALL_FACTOR) )
             {
 
                 theHorse.fall();
-                theHorse.decreaseConfidence();
+                //theHorse.decreaseConfidence();
 
             }
+
         }
     }
         
@@ -318,7 +361,7 @@ public class Race
     }
 
     //Check if all the horses have fallen - Used in the raceWonBy method
-    private boolean allFallen()
+    public boolean allFallen()
     {
         Horse[] horses = {lane1Horse, lane2Horse, lane3Horse, lane4Horse, lane5Horse};
         for (Horse horse : horses)
@@ -333,6 +376,46 @@ public class Race
 
 
     }
+
+    // GUI METHODS
+    public static boolean shouldMove(Horse horse) {
+        if  (!horse.hasFallen())
+        {
+            //the probability that the horse will move forward depends on the confidence;
+            if (Math.random() < horse.getConfidence())
+            {
+               return true;
+            }else {
+                return false;
+            }
+
+
+        }
+        return false;
+    }
+
+    public int getRaceLength() {
+        return raceLength;
+    }
+
+    public void setCondition(String condition) {
+        this.condition = condition;
+    }
+    public String getCondition() {
+        return condition;
+    }
+
+    public boolean winner(Horse theHorse){
+        if (theHorse.getDistanceTravelled() == raceLength)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
 
 
 

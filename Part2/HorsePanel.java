@@ -28,7 +28,7 @@ class HorsePanel extends JPanel implements ActionListener
         this.race = race;
         this.setBounds(x, y, PANEL_WIDTH, PANEL_HEIGHT);
         //this.setPreferredSize(new Dimension(PANEL_WIDTH, PANEL_HEIGHT));
-        this.setBackground(Color.BLUE);
+        this.setBackground(Color.pink);
         horseImage = new ImageIcon(horse.getImagePath()).getImage();
 
         pxRatio = (double)(PANEL_WIDTH - horseImage.getWidth(null)) / race.getRaceLength();
