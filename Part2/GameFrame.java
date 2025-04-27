@@ -6,12 +6,13 @@ import javax.swing.*;
 
 public class GameFrame extends JFrame
 {
-    HorsePanel horsePanel;
+    HorsePanel horsePanel, horsePanel2, horsePanel3, horsePanel4, horsePanel5;
     Horse[] horses = new Horse[5];
+    JButton restartButton;
+    int raceDistance = 0;
 
-    public GameFrame(Horse[] horses) {
-
-    
+    public GameFrame(Horse[] horses , int distance) {
+        this.raceDistance = distance;
         this.horses = horses;
 
 
@@ -20,11 +21,11 @@ public class GameFrame extends JFrame
         this.setSize(800, 600);
         this.setResizable(false);
 
-        horsePanel = new HorsePanel(0 ,30, horses[0]);
-        HorsePanel horsePanel2 = new HorsePanel(0 ,100, horses[1]);
-        HorsePanel horsePanel3 = new HorsePanel(0 ,170, horses[2]);
-        HorsePanel horsePanel4 = new HorsePanel(0 ,240, horses[3]);
-        HorsePanel horsePanel5 = new HorsePanel(0 ,310, horses[4]);
+        horsePanel = new HorsePanel(0 ,30, horses[0], raceDistance);
+        horsePanel2 = new HorsePanel(0 ,100, horses[1], raceDistance);
+        horsePanel3 = new HorsePanel(0 ,170, horses[2], raceDistance);
+        horsePanel4 = new HorsePanel(0 ,240, horses[3], raceDistance);
+        horsePanel5 = new HorsePanel(0 ,310, horses[4], raceDistance);
 
 
         this.add(horsePanel);
@@ -51,7 +52,17 @@ public class GameFrame extends JFrame
         horsesLabel5.setBounds(150, 288, 300, 30);
         this.add(horsesLabel5);
 
+        //
+        restartButton = new JButton("Restart Race");
+        restartButton.setBounds(650, 520, 120, 30);
+        restartButton.addActionListener(e -> {
+            // dispose this window and open a fresh one
+            new GameFrame(horses , raceDistance).setVisible(true);
+            dispose();
+        });
+        add(restartButton);
 
+        setVisible(true);
 
 
 

@@ -96,7 +96,8 @@ public class GuiFrame extends JFrame implements ActionListener{
     private JSlider distanceSlider;         
     private JButton submitButton;
     private Horse[] horses; // Array to hold horse objects
-    private String[] breeds = new String[5]; // Array to hold horse breeds        
+    private String[] breeds = new String[5]; // Array to hold horse breeds  
+    private int sliderValue = 10;    
 
     public GuiFrame(Horse[] horses) {
         super("Horse Race Sim");
@@ -228,7 +229,7 @@ public class GuiFrame extends JFrame implements ActionListener{
 
             int numHorses = Integer.parseInt((String) horsesComboBox.getSelectedItem());
             String weather = (String) comboBox.getSelectedItem(); 
-            int distance = distanceSlider.getValue();
+            this.sliderValue = distanceSlider.getValue();
 
 
             // Selected breeds
@@ -246,7 +247,7 @@ public class GuiFrame extends JFrame implements ActionListener{
 
 
 
-            GameFrame gameFrame = new GameFrame(horses); // Create a new GameFrame instance
+            GameFrame gameFrame = new GameFrame(horses , this.sliderValue); // Create a new GameFrame instance
             gameFrame.setVisible(true);
             this.dispose();
 
