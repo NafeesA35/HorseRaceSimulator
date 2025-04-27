@@ -93,13 +93,19 @@ class HorsePanel extends JPanel {
 public class GuiFrame extends JFrame implements ActionListener{
 
     
-    private JComboBox<String> comboBox, horsesComboBox, horse1Breed , horse2Breed, horse3Breed, horse4Breed, horse5Breed;     
+    private JComboBox<String> comboBox, horsesComboBox, horse1Breed , horse2Breed, horse3Breed, horse4Breed, horse5Breed , saddle1, saddle2, saddle3, saddle4, saddle5;
+    private JComboBox<String> shoe1, shoe2, shoe3, shoe4, shoe5;
+    private JComboBox<String> colour1, colour2, colour3, colour4, colour5;
+
     private JSlider distanceSlider;         
     private JButton submitButton;
     private Horse[] horses; // Array to hold horse objects
     private String[] breeds = new String[5]; // Array to hold horse breeds  
     private int sliderValue = 10;    
     private Race race;
+    private String[] horseColours = new String[5]; // Array to hold horse colours
+    private String[] horseSaddles = new String[5]; // Array to hold horse saddles
+    private String[] horseShoes = new String[5]; // Array to hold horse shoes
 
     public GuiFrame(Horse[] horses) {
         super("Horse Race Sim");
@@ -215,7 +221,61 @@ public class GuiFrame extends JFrame implements ActionListener{
         horse5Breed.setBounds(180, 375, 80, 20);
         this.add(horse5Breed);
         horse5Breed.setVisible(true);
-        
+
+        // START - All about saddles
+
+        JComboBox<String> saddle1 = saddleComboBox(300, 255, 100, 20);
+        this.saddle1 = saddle1;
+
+        JComboBox<String> saddle2 = saddleComboBox(300, 285, 100, 20);
+        this.saddle2 = saddle2;
+
+        JComboBox<String> saddle3 = saddleComboBox(300, 315, 100, 20);
+        this.saddle3 = saddle3;
+
+        JComboBox<String> saddle4 = saddleComboBox(300, 345, 100, 20);
+        this.saddle4 = saddle4;
+
+        JComboBox<String> saddle5 = saddleComboBox(300, 375, 100, 20);
+        this.saddle5 = saddle5;
+
+        // END - All about saddles
+
+        // START - All about shoes
+        JComboBox<String> shoe1 = shoeComboBox(450, 255, 100, 20);
+        this.shoe1 = shoe1;
+
+        JComboBox<String> shoe2 = shoeComboBox(450, 285, 100, 20);
+        this.shoe2 = shoe2;
+
+        JComboBox<String> shoe3 = shoeComboBox(450, 315, 100, 20);
+        this.shoe3 = shoe3;
+        JComboBox<String> shoe4 = shoeComboBox(450, 345, 100, 20);
+        this.shoe4 = shoe4;
+
+        JComboBox<String> shoe5 = shoeComboBox(450, 375, 100, 20);
+        this.shoe5 = shoe5;
+        // END - All about shoes
+
+        // START - All about colours
+        JComboBox<String> colour1 = colourBox(600, 255, 100, 20);
+        this.colour1 = colour1;
+
+        JComboBox<String> colour2 = colourBox(600, 285, 100, 20);
+        this.colour2 = colour2;
+
+        JComboBox<String> colour3 = colourBox(600, 315, 100, 20);
+        this.colour3 = colour3;
+
+        JComboBox<String> colour4 = colourBox(600, 345, 100, 20);
+        this.colour4 = colour4;
+
+        JComboBox<String> colour5 = colourBox(600, 375, 100, 20);
+        this.colour5 = colour5;
+        // END - All about colours
+
+
+
 
 
 
@@ -242,50 +302,40 @@ public class GuiFrame extends JFrame implements ActionListener{
             breeds[3] = (String) horse4Breed.getSelectedItem();
             breeds[4] = (String) horse5Breed.getSelectedItem();
 
+
+            // Selected saddles
+            horseSaddles[0] = (String) saddle1.getSelectedItem();
+            horseSaddles[1] = (String) saddle2.getSelectedItem();
+            horseSaddles[2] = (String) saddle3.getSelectedItem();
+            horseSaddles[3] = (String) saddle4.getSelectedItem();
+            horseSaddles[4] = (String) saddle5.getSelectedItem();
+
+            // END - Selected saddles
+
+            // Selected shoes
+            horseShoes[0] = (String) shoe1.getSelectedItem();
+            horseShoes[1] = (String) shoe2.getSelectedItem();
+            horseShoes[2] = (String) shoe3.getSelectedItem();
+            horseShoes[3] = (String) shoe4.getSelectedItem();
+            horseShoes[4] = (String) shoe5.getSelectedItem();
+            // END - Selected shoes
+
+            // Selected colours
+            horseColours[0] = (String) colour1.getSelectedItem();
+            horseColours[1] = (String) colour2.getSelectedItem();
+            horseColours[2] = (String) colour3.getSelectedItem();
+            horseColours[3] = (String) colour4.getSelectedItem();
+            horseColours[4] = (String) colour5.getSelectedItem();
+            // END - Selected colours
+
+
+
             for (int i = 0; i < breeds.length && i < horses.length; i++) {
                 horses[i].setBreed(breeds[i]);
-                horses[i].setImagePath(breeds[i]);
+                horses[i].setImagePath(horseColours[i], horseSaddles[i], horseShoes[i]);
             }
 
 
-            // ALL ABOUT SADDLES
-
-            JComboBox<String> saddle1 = saddleComboBox(300, 250, 100, 30);
-            this.add(saddle1);
-            saddle1.setVisible(true);
-            JLabel saddleLabel1 = createLabel("Saddle 1: ", 300, 250, 200, 30);
-            this.add(saddleLabel1);
-            saddleLabel1.setVisible(true);
-
-            JComboBox<String> saddle2 = saddleComboBox(300, 280, 100, 30);
-            this.add(saddle2);
-            saddle2.setVisible(true);
-            JLabel saddleLabel2 = createLabel("Saddle 2: ", 300, 280, 200, 30);
-            this.add(saddleLabel2);
-            saddleLabel2.setVisible(true);
-            
-            JComboBox<String> saddle3 = saddleComboBox(300, 310, 100, 30);
-            this.add(saddle3);
-            saddle3.setVisible(true);
-            JLabel saddleLabel3 = createLabel("Saddle 3: ", 300, 310, 200, 30);
-            this.add(saddleLabel3);
-            saddleLabel3.setVisible(true);
-
-            JComboBox<String> saddle4 = saddleComboBox(300, 340, 100, 30);
-            this.add(saddle4);
-            saddle4.setVisible(true);
-            JLabel saddleLabel4 = createLabel("Saddle 4: ", 300, 340, 200, 30);
-            this.add(saddleLabel4);
-            saddleLabel4.setVisible(true);
-
-            JComboBox<String> saddle5 = saddleComboBox(300, 370, 100, 30);
-            this.add(saddle5);
-            saddle5.setVisible(true);
-            JLabel saddleLabel5 = createLabel("Saddle 5: ", 300, 370, 200, 30);
-            this.add(saddleLabel5);
-            saddleLabel5.setVisible(true);
-
-            
 
 
             this.race = new Race(this.sliderValue); // Create a new
@@ -301,24 +351,39 @@ public class GuiFrame extends JFrame implements ActionListener{
         JLabel label = new JLabel(text);
         label.setBounds(x, y, width, height);
         label.setVisible(true);
+        this.add(label);
         return label;
     }
 
     public JComboBox<String> saddleComboBox(int x, int y, int width, int height) {
-        JComboBox<String> comboBox = new JComboBox<>(new String[]{"N/A", "Brown", "Red"});
+        JComboBox<String> comboBox = new JComboBox<>(new String[]{"Normal", "Brown", "Red"});
         comboBox.setBounds(x, y, width, height);
         comboBox.setVisible(true);
         comboBox.setSelectedIndex(0);
+        this.add(comboBox);
         return comboBox;
     }
 
     public JComboBox<String> shoeComboBox(int x, int y, int width, int height) {
-        JComboBox<String> comboBox = new JComboBox<>(new String[]{"N/A", "Brown", "Silver"});
+        JComboBox<String> comboBox = new JComboBox<>(new String[]{"Normal", "Brown", "Silver"});
         comboBox.setBounds(x, y, width, height);
         comboBox.setVisible(true);
         comboBox.setSelectedIndex(0);
+        this.add(comboBox);
         return comboBox;
     }
+
+    public JComboBox<String> colourBox( int x, int y, int width, int height) {
+        JComboBox<String> comboBox = new JComboBox<>(new String[]{"Black", "Brown", "Blue"});
+        comboBox.setBounds(x, y, width, height);
+        comboBox.setVisible(true);
+        comboBox.setSelectedIndex(0);
+        this.add(comboBox);
+        return comboBox;
+    }
+
+
+
 }
 
 
