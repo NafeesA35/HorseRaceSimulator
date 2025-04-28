@@ -34,36 +34,36 @@ public class GameFrame extends JFrame
         if (numberOfHorses >= 1) {
             horsePanel = new HorsePanel(0 ,30, horses[0], race, this);
             this.add(horsePanel);
-            JLabel horsesLabel = new JLabel("Horse name: " + horsePanel.horse.getName() + ", Confidence: " + horsePanel.horse.getConfidence() + ", Breed: " + horsePanel.horse.getBreed());
-            horsesLabel.setBounds(150, 8, 300, 30);
+            JLabel horsesLabel = new JLabel("Horse name: " + horsePanel.horse.getName() + ", Confidence: " + Race.roundToTwoDecimalPlaces(horsePanel.horse.getConfidence()) + ", Breed: " + horsePanel.horse.getBreed());
+            horsesLabel.setBounds(150, 8, 400, 30);
             this.add(horsesLabel);
         }
         if (numberOfHorses >= 2) {
             horsePanel2 = new HorsePanel(0 ,100, horses[1], race, this);
             this.add(horsePanel2);
-            JLabel horsesLabel2 = new JLabel("Horse name: " + horsePanel2.horse.getName() + ", Confidence: " + horsePanel2.horse.getConfidence() + ", Breed: " + horsePanel2.horse.getBreed());
-            horsesLabel2.setBounds(150, 78, 300, 30);
+            JLabel horsesLabel2 = new JLabel("Horse name: " + horsePanel2.horse.getName() + ", Confidence: " + Race.roundToTwoDecimalPlaces(horsePanel2.horse.getConfidence()) + ", Breed: " + horsePanel2.horse.getBreed());
+            horsesLabel2.setBounds(150, 78, 400, 30);
             this.add(horsesLabel2);
         }
         if (numberOfHorses >= 3) {
             horsePanel3 = new HorsePanel(0 ,170, horses[2], race, this);
             this.add(horsePanel3);
-            JLabel horsesLabel3 = new JLabel("Horse name: " + horsePanel3.horse.getName() + ", Confidence: " + horsePanel3.horse.getConfidence() + ", Breed: " + horsePanel3.horse.getBreed());
-            horsesLabel3.setBounds(150, 148, 300, 30);
+            JLabel horsesLabel3 = new JLabel("Horse name: " + horsePanel3.horse.getName() + ", Confidence: " + Race.roundToTwoDecimalPlaces(horsePanel3.horse.getConfidence()) + ", Breed: " + horsePanel3.horse.getBreed());
+            horsesLabel3.setBounds(150, 148, 400, 30);
             this.add(horsesLabel3);
         }
         if (numberOfHorses >= 4) {
             horsePanel4 = new HorsePanel(0 ,240, horses[3], race, this);
             this.add(horsePanel4);
-            JLabel horsesLabel4 = new JLabel("Horse name: " + horsePanel4.horse.getName() + ", Confidence: " + horsePanel4.horse.getConfidence() + ", Breed: " + horsePanel4.horse.getBreed());
-            horsesLabel4.setBounds(150, 218, 300, 30);
+            JLabel horsesLabel4 = new JLabel("Horse name: " + horsePanel4.horse.getName() + ", Confidence: " + Race.roundToTwoDecimalPlaces(horsePanel4.horse.getConfidence()) + ", Breed: " + horsePanel4.horse.getBreed());
+            horsesLabel4.setBounds(150, 218, 400, 30);
             this.add(horsesLabel4);
         }
         if (numberOfHorses >= 5) {
             horsePanel5 = new HorsePanel(0 ,310, horses[4], race, this);
             this.add(horsePanel5);
-            JLabel horsesLabel5 = new JLabel("Horse name: " + horsePanel5.horse.getName() + ", Confidence: " + horsePanel5.horse.getConfidence() + ", Breed: " + horsePanel5.horse.getBreed());
-            horsesLabel5.setBounds(150, 288, 300, 30);
+            JLabel horsesLabel5 = new JLabel("Horse name: " + horsePanel5.horse.getName() + ", Confidence: " + Race.roundToTwoDecimalPlaces(horsePanel5.horse.getConfidence()) + ", Breed: " + horsePanel5.horse.getBreed());
+            horsesLabel5.setBounds(150, 288, 400, 30);
             this.add(horsesLabel5);
         }
 
@@ -77,6 +77,8 @@ public class GameFrame extends JFrame
             dispose();
         });
         add(restartButton);
+
+        restartButton.setEnabled(false);
 
         setVisible(true);
 
@@ -93,6 +95,7 @@ public class GameFrame extends JFrame
         if (horsePanel4 != null) horsePanel4.timer.stop();
         if (horsePanel5 != null) horsePanel5.timer.stop();
         JOptionPane.showMessageDialog(this, "The winner is: " + winner.getName());
+        restartButton.setEnabled(true);
 
     }
 
@@ -104,6 +107,7 @@ public class GameFrame extends JFrame
         if (horsePanel4 != null) horsePanel4.timer.stop();
         if (horsePanel5 != null) horsePanel5.timer.stop();
         JOptionPane.showMessageDialog(this, "All the horses have fallen. No winner.");
+        restartButton.setEnabled(true);
 
     }
 

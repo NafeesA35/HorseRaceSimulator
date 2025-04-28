@@ -206,14 +206,15 @@ public class Race
             //so if you double the confidence, the probability that it will fall is *2
             double FALL_FACTOR = 0;
             if(condition.equals("Rainy")){
-                FALL_FACTOR = 0.03;
+                FALL_FACTOR = 0.025;
             }else if(condition.equals("Icy")){
-                FALL_FACTOR = 0.05;
+                FALL_FACTOR = 0.035;
             }else if(condition.equals("Random")){
-                if(Math.random() < 0.33){
-                    FALL_FACTOR = 0.1;
-                }else if(Math.random() > 0.33 && Math.random() < 0.66){
-                    FALL_FACTOR = 0.05;
+                double random = Math.random();
+                if(random < 0.33){
+                    FALL_FACTOR = 0.025;
+                }else if(random > 0.33 && random < 0.66){
+                    FALL_FACTOR = 0.035;
                 }else{
                     FALL_FACTOR = 0.00;
                 }
@@ -233,7 +234,7 @@ public class Race
             {
 
                 theHorse.fall();
-                //theHorse.decreaseConfidence();
+                theHorse.decreaseConfidence();
 
             }
 
@@ -339,7 +340,7 @@ public class Race
             System.out.print(' ');
         }
 
-        System.out.print(theHorse.getName() + " (Current Confidence: "+ theHorse.getConfidence()+") " +" (Distance Travelled: "+ theHorse.getDistanceTravelled()+") ");
+        System.out.print(theHorse.getName() + " (Current Confidence: "+ roundToTwoDecimalPlaces(theHorse.getConfidence())+") " +" (Distance Travelled: "+ theHorse.getDistanceTravelled()+") ");
 
     }
         
@@ -415,6 +416,11 @@ public class Race
             return false;
         }
     }
+
+    public static double roundToTwoDecimalPlaces(double value) {
+        return Math.round(value * 100.0) / 100.0;
+    }
+
 
 
 

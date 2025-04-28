@@ -99,6 +99,7 @@ public class GuiFrame extends JFrame implements ActionListener{
 
     private JSlider distanceSlider;         
     private JButton submitButton;
+    private JButton statsButton;
     private Horse[] horses; // Array to hold horse objects
     private String[] breeds = new String[5]; // Array to hold horse breeds  
     private int sliderValue = 10;    
@@ -274,8 +275,29 @@ public class GuiFrame extends JFrame implements ActionListener{
         this.colour5 = colour5;
         // END - All about colours
 
+        // Labels for breeds, saddles, shoes and colours
+        JLabel breedLabel = createLabel("Select horse breed:", 180, 220, 200, 30);
+        this.add(breedLabel);
+
+        JLabel saddleLabel = createLabel("Select horse saddle:", 300, 220, 200, 30);
+        this.add(saddleLabel);
 
 
+        JLabel shoeLabel = createLabel("Select horse shoe:", 450, 220, 200, 30);
+        this.add(shoeLabel);
+
+        JLabel colourLabel = createLabel("Select horse colour:", 600, 220, 200, 30);
+        this.add(colourLabel);
+
+        // END - Labels for breeds, saddles, shoes and colours
+
+
+
+
+        // Message:
+        JLabel messageLabel = createLabel("Friesian breeds get a confidence boost of 0.05 and mustang 0.02. Brown saddles gives speed boost (50% chance at each move)", 30, 400, 750, 30);
+        JLabel messageLabel2 = createLabel("Red saddles give you an endurance bonus, making you less likely to fall. Silver shoes have the same benefits as Brown saddles.", 30, 440, 750, 30);
+        JLabel messageLabel3 = createLabel("Brown shoes give you greater endurance", 30, 480, 750, 30);
 
 
 
@@ -332,7 +354,11 @@ public class GuiFrame extends JFrame implements ActionListener{
 
             for (int i = 0; i < breeds.length && i < horses.length; i++) {
                 horses[i].setBreed(breeds[i]);
+                horses[i].setColor(horseColours[i]);
+                horses[i].setSaddle(horseSaddles[i]);
+                horses[i].setShoe(horseShoes[i]);
                 horses[i].setImagePath(horseColours[i], horseSaddles[i], horseShoes[i]);
+                horses[i].recalculateBonuses();
             }
 
 

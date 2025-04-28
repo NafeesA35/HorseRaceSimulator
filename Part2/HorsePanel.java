@@ -82,6 +82,7 @@ class HorsePanel extends JPanel implements ActionListener
 
         if (race.winner(horse)) {
             horse.increaseConfidence();
+            repaint();
             timer.stop();
             gameFrame.displayWinner(horse);
             return;
