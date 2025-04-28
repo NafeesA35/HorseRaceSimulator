@@ -1,7 +1,5 @@
 package Part1;
 
-import java.util.Scanner;
-
 /**
  * The horse class is a representation of a horse in the simulator, consisting of attributes such as name, symbol, confidence, distance travelled, and whether it has fallen.
  * 
@@ -43,7 +41,7 @@ public class Horse
     {
         this.symbol = horseSymbol;
         this.name = horseName;
-        verifyConfidence(horseConfidence);
+        setConfidence(horseConfidence);
 
     }
     
@@ -51,7 +49,7 @@ public class Horse
     
     //Other methods of class Horse
     // GETTERS - getConfidence, getDistanceTravelled, getName, getSymbol, hasFallen
-    // SETTERS - setConfidence, setSymbol, goBackToStart, moveForward, fall
+    // SETTERS - setConfidence, setSymbol, goBackToStart, moveForward, fall, setName
     public void fall()
     {   
         this.hasFallen = true;
@@ -105,37 +103,9 @@ public class Horse
     {
         this.symbol = newSymbol;
     }
-
-    // Ensure confidence is between 0 and 1
-    private void verifyConfidence(double confidence)
+    public void setName(String newName)
     {
-        boolean valid = false;
-        Scanner scanner = new Scanner(System.in);
-        double newConfidence = confidence;
-        // Loop until a valid confidence value is entered
-        while (!valid)
-        {
-            if (newConfidence > 0 && newConfidence < 1)
-            {
-                valid = true;
-            }
-            else
-            {
-                System.out.println("Please enter a number between 0 and 1: ");
-                
-                try
-                {
-                    newConfidence = scanner.nextDouble();
-                }
-                catch (Exception e)
-                {
-                    System.out.println("Invalid again!");
-                    scanner.next(); // Clear the invalid input
-
-                }
-            }
-        }
-        setConfidence(newConfidence);
+        this.name = newName;
     }
 
     public void decreaseConfidence()
