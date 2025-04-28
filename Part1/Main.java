@@ -21,6 +21,8 @@ public class Main {
             int numberOfHorses = inputInt("How many horses do you want to race? (2-5) : ", 2, 5);
             for (int i = 0; i < numberOfHorses; i++) {
                 race.addHorse(horses[i], i + 1);
+                horses[i].setName(inputString("Enter a name for the horse "));
+                horses[i].setConfidence(inputDouble("A confidence value between > ", 0, 1));
             }
             int raceTime = inputInt("How many times do you want the race to run? (1-5) : ", 1, 5);
             for (int i =0; i < raceTime; i++){
@@ -53,6 +55,34 @@ public class Main {
                 scanner.next(); 
             }
         }
+        return input;
+    }
+
+    public static double inputDouble(String message, double min, double max) {
+        System.out.println(message);
+        Scanner scanner = new Scanner(System.in);
+        boolean valid = false;
+        double input = 0;
+        while (!valid) {
+            try {
+                input = scanner.nextDouble();
+                if (input <= min || input >= max) {
+                    System.out.println("Input must be between " + min + " and " + max);
+                } else {
+                    valid = true;
+                }
+            } catch (Exception e) {
+                System.out.println("You input MUST be a number");
+                scanner.next(); 
+            }
+        }
+        return input;
+    }
+
+    public static String inputString(String message) {
+        System.out.println(message);
+        Scanner scanner = new Scanner(System.in);
+        String input = scanner.nextLine();
         return input;
     }
 
