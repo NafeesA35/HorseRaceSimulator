@@ -22,6 +22,7 @@ class HorsePanel extends JPanel implements ActionListener
     double pxRatio;
     GameFrame gameFrame;
 
+    // Create a horse panel - Each horse has its own pane, where it runs.
     public HorsePanel(int x, int y, Horse horse , Race race, GameFrame frame) {
         this.gameFrame = frame;
         this.horse = horse;
@@ -37,7 +38,7 @@ class HorsePanel extends JPanel implements ActionListener
         timer.start();
 
     }
-
+    // Paint the horse image on the oabel
     public void paint(Graphics g) {
 
         super.paint(g);
@@ -46,10 +47,11 @@ class HorsePanel extends JPanel implements ActionListener
         g2d.drawImage(horseImage, startX, startY, null);
     }
 
+    // The actionListener method that is called every 100ms
     @Override
     public void actionPerformed(ActionEvent e) {
         horse.incrementTime();
-        // Update the position of the horse image
+        // If the horse has fallen, we need to stop the timer and markit as fallen
         if(horse.hasFallen()){
             startX = 0;
             horse.incrementTotalFalls();
@@ -63,7 +65,7 @@ class HorsePanel extends JPanel implements ActionListener
 
             return;
         }
-
+        // Logic for horse movement.
         if(startX + horseImage.getWidth(null) >= PANEL_WIDTH) {
             timer.stop();
             return;
@@ -79,7 +81,7 @@ class HorsePanel extends JPanel implements ActionListener
                 startX = (int)(horse.getDistanceTravelled() * pxRatio);
             }
         }
-
+        // If a horse has won we can end the game and display the winner
         if (race.winner(horse)) {
             horse.increaseConfidence();
             repaint();

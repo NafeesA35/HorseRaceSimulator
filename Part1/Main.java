@@ -12,9 +12,8 @@ public class Main {
         Horse horse5 = new Horse('#', "Ty", 0.5);
         Horse[] horses = {horse, horse2, horse3, horse4, horse5};
 
-        System.out.println("Are you accessing the terminal version? (Y)/(Yes) . Please note that any other input will run the GUI version.");
-        Scanner scanner = new Scanner(System.in);
-        String response = scanner.nextLine();
+        // If the user wants to run the terminal version, they replu with Y or yes. Any other response executes gui code.
+        String response = inputString("Are you accessing the terminal version? (Y)/(Yes) . Please note that any other input will run the GUI version.");
         if(response.toLowerCase().equals("y") || response.toLowerCase().equals("yes")){
             int distance = inputInt("Enter the race distance between 10 and 25 Inclusive" , 10, 25);
             Race race = new Race(distance);
@@ -36,7 +35,7 @@ public class Main {
 
 
     }
-
+    // User enters an interger within a range.
     public static int inputInt(String message, int min, int max) {
         System.out.println(message);
         Scanner scanner = new Scanner(System.in);
@@ -57,7 +56,7 @@ public class Main {
         }
         return input;
     }
-
+    // User enters a double within a range.
     public static double inputDouble(String message, double min, double max) {
         System.out.println(message);
         Scanner scanner = new Scanner(System.in);
@@ -78,7 +77,7 @@ public class Main {
         }
         return input;
     }
-
+    // Simple input string method to get a string from the user.
     public static String inputString(String message) {
         System.out.println(message);
         Scanner scanner = new Scanner(System.in);

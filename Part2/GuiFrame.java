@@ -214,7 +214,7 @@ public class GuiFrame extends JFrame implements ActionListener{
         // Message:
         JLabel messageLabel = createLabel("Friesian breeds get a confidence boost of 0.05 and mustang 0.02. Brown saddles gives speed boost (35% chance at each move)", 30, 400, 750, 30);
         JLabel messageLabel2 = createLabel("Red saddles give you an endurance bonus, making you less likely to fall. Silver shoes have the same benefits as Brown saddles.", 30, 440, 750, 30);
-        JLabel messageLabel3 = createLabel("Brown shoes give you greater endurance", 30, 480, 750, 30);
+        JLabel messageLabel3 = createLabel("Brown shoes give you greater endurance. Icy and Rainy weather increases fall chance", 30, 475, 750, 30);
 
 
 
