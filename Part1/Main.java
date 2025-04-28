@@ -1,57 +1,41 @@
 package Part1;
+import Part2.Gui;
 import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-
-
-        int distance = inputInt("Enter the race distance between 10 and 25 :");
-        Race race = new Race(distance);
-        Horse horse = new Horse('■', "Opio", 0.5);
-        Horse horse2 = new Horse('█', "Roach", 0.5);
-        Horse horse3 = new Horse('░', "Pasta", 0.5);
-        Horse horse4 = new Horse('░', "Khat", 0.5);
-        Horse horse5 = new Horse('░', "Ty", 0.5);
+        // Ready horses for the GUI.
+        Horse horse = new Horse('$', "Opio", 0.5);
+        Horse horse2 = new Horse('%', "Roach", 0.5);
+        Horse horse3 = new Horse('+', "Pasta", 0.5);
+        Horse horse4 = new Horse('@', "Khat", 0.5);
+        Horse horse5 = new Horse('#', "Ty", 0.5);
         Horse[] horses = {horse, horse2, horse3, horse4, horse5};
 
-        race.addHorse(horse, 1);
-        race.addHorse(horse2, 2);
-        race.addHorse(horse3, 3);
-        race.addHorse(horse4, 4);
-        race.addHorse(horse5, 5);
-
-        int raceTime = inputInt("How many times do you want the race to run? (1-5) : ");
-        if(raceTime < 1) {
-            System.out.println("Number less than 1 is not allowed. Defaulting to 1.");
-            raceTime = 1;
-        }else if(raceTime > 5) {
-            System.out.println("Number greater than 5 is not allowed. Setting to 5.");
-            raceTime = 5;
+        System.out.println("Are you accessing the terminal version? (Y)/(Yes) . Please note that any other input will run the GUI version.");
+        Scanner scanner = new Scanner(System.in);
+        String response = scanner.nextLine();
+        if(response.toLowerCase().equals("y") || response.toLowerCase().equals("yes")){
+            int distance = inputInt("Enter the race distance between 10 and 25 Inclusive" , 10, 25);
+            Race race = new Race(distance);
+            int numberOfHorses = inputInt("How many horses do you want to race? (2-5) : ", 2, 5);
+            for (int i = 0; i < numberOfHorses; i++) {
+                race.addHorse(horses[i], i + 1);
+            }
+            int raceTime = inputInt("How many times do you want the race to run? (1-5) : ", 1, 5);
+            for (int i =0; i < raceTime; i++){
+                race.startRace();
+            }
+        }else{
+            // Start the GUI version.
+            Gui.startRaceGui(horses);
         }
-
-        for (int i =0; i < raceTime; i++){
-            race.startRace();
-        }
- 
-
-
-
-        /* 
-        new GuiFrame(horses);
-
-        */
-
-
-        /* 
-        GuiFrame gui = new GuiFrame();
-
-        */
 
 
 
     }
 
-    public static int inputInt(String message) {
+    public static int inputInt(String message, int min, int max) {
         System.out.println(message);
         Scanner scanner = new Scanner(System.in);
         boolean valid = false;
@@ -59,7 +43,11 @@ public class Main {
         while (!valid) {
             try {
                 input = scanner.nextInt();
-                valid = true;
+                if (input < min || input > max) {
+                    System.out.println("Input must be between " + min + " and " + max);
+                } else {
+                    valid = true;
+                }
             } catch (Exception e) {
                 System.out.println("You input MUST be an integer");
                 scanner.next(); 

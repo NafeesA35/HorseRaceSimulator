@@ -6,100 +6,15 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.*;
 
-/* 
-public class Gui {
-
-    public void startRaceGui(Horse[] horses, int raceLength) {
-        // Create a JFrame for the GUI
-        JFrame frame = new JFrame("Horse Race Sim");
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(800, 600);
-        frame.setLayout(null);
-        frame.setVisible(true);
-        frame.setResizable(false);
-
-
-        frame.add(addPanel(0, 50, 600, 50, Color.BLUE));
-        frame.add(addPanel(0, 150, 600, 50, Color.RED));
-        frame.add(addPanel(0, 250, 600, 50, Color.GREEN));
-        frame.add(addPanel(0, 350, 600, 50, Color.YELLOW));
-        frame.add(addPanel(0, 450, 600, 50, Color.ORANGE));
-
-    }
-
-
-    private JPanel addPanel(int x , int y, int width, int height, Color color) {
-        
-        ImageIcon imageIcon = new ImageIcon("Part2/horse.png");
-        Image horseImage = imageIcon.getImage();
-
-        System.out.println("Current working directory: " + System.getProperty("user.dir"));
-
-        if (imageIcon.getIconWidth() <= 0) {
-            System.out.println("Warning: Could not load horse.png image");
-        }
-        
-        
-        // Create a custom panel that draws the image
-        JPanel panel = new JPanel() {
-            @Override
-            protected void paintComponent(Graphics g) {
-                super.paintComponent(g);
-                // Draw the image at position 10,10 within the panel
-                g.drawImage(horseImage, 10, 0, null);
-            }
-        };
-        
-        
-        panel.setLayout(new BorderLayout());
-        panel.setBounds(x, y, width, height);
-        panel.setVisible(true);
-        panel.setBackground(color);
-        return panel;
-        
-    }
-
-
-	
-}
-
-
-class HorsePanel extends JPanel {
-    private Image horseImage;
-    Horse horse;
-
-    
-    public HorsePanel() {
-        // Load the horse image
-        ImageIcon imageIcon = new ImageIcon("Part2/horse.png");
-        horseImage = imageIcon.getImage();
-        
-        if (horseImage == null) {
-            System.out.println("Warning: Could not load horse.png image");
-        }
-    }
-    
-    @Override
-    protected void paintComponent(Graphics g) {
-        super.paintComponent(g);
-        // Draw the horse image at position 10,10 within the panel
-        g.drawImage(horseImage, 10, 0, null);
-    }
-
-}
-
-*/
-
 public class GuiFrame extends JFrame implements ActionListener{
 
-    
+    // We need to be able to access data in the user event handler so we need to make these instance variables 
     private JComboBox<String> comboBox, horsesComboBox, horse1Breed , horse2Breed, horse3Breed, horse4Breed, horse5Breed , saddle1, saddle2, saddle3, saddle4, saddle5;
     private JComboBox<String> shoe1, shoe2, shoe3, shoe4, shoe5;
     private JComboBox<String> colour1, colour2, colour3, colour4, colour5;
 
     private JSlider distanceSlider;         
     private JButton submitButton;
-    private JButton statsButton;
     private Horse[] horses; // Array to hold horse objects
     private String[] breeds = new String[5]; // Array to hold horse breeds  
     private int sliderValue = 10;    
@@ -116,11 +31,12 @@ public class GuiFrame extends JFrame implements ActionListener{
         this.setSize(800, 600);
         this.setLayout(null);
 
-
+        // Label the comboBox
         JLabel horsesLabel = new JLabel("Select number of horses:");
         horsesLabel.setBounds(50, 20, 200, 30);
         this.add(horsesLabel);
-        
+
+        // Allow user to select number of horses
         String[] horseOptions = {"2", "3", "4", "5"};
         JComboBox<String> horsesComboBox = new JComboBox<>(horseOptions);
         horsesComboBox.setBounds(250, 20, 100, 30);
@@ -128,7 +44,7 @@ public class GuiFrame extends JFrame implements ActionListener{
         this.add(horsesComboBox);
         this.setResizable(false);
 
-        // END OF RADIO BUTTONS
+
 
         // START - Weather conditions
         String[] weatherConditions = {"Random", "Normal", "Icy", "Rainy"};
@@ -172,6 +88,7 @@ public class GuiFrame extends JFrame implements ActionListener{
 
 
         // EVERYTHING ABOUT HORSES BELOW
+        // This is where we add the horse labels and combo boxes for breed, saddle, shoe and colour
 
         JLabel horse1Label = createLabel("Horse 1: Opio :", 30, 250, 200, 30);
         this.add(horse1Label);
@@ -295,7 +212,7 @@ public class GuiFrame extends JFrame implements ActionListener{
 
 
         // Message:
-        JLabel messageLabel = createLabel("Friesian breeds get a confidence boost of 0.05 and mustang 0.02. Brown saddles gives speed boost (50% chance at each move)", 30, 400, 750, 30);
+        JLabel messageLabel = createLabel("Friesian breeds get a confidence boost of 0.05 and mustang 0.02. Brown saddles gives speed boost (35% chance at each move)", 30, 400, 750, 30);
         JLabel messageLabel2 = createLabel("Red saddles give you an endurance bonus, making you less likely to fall. Silver shoes have the same benefits as Brown saddles.", 30, 440, 750, 30);
         JLabel messageLabel3 = createLabel("Brown shoes give you greater endurance", 30, 480, 750, 30);
 
@@ -351,7 +268,7 @@ public class GuiFrame extends JFrame implements ActionListener{
             // END - Selected colours
 
 
-
+            // Update horse object attributes based on selected values
             for (int i = 0; i < breeds.length && i < horses.length; i++) {
                 horses[i].setBreed(breeds[i]);
                 horses[i].setColor(horseColours[i]);
@@ -363,7 +280,7 @@ public class GuiFrame extends JFrame implements ActionListener{
 
 
 
-
+            // Sets race distance
             this.race = new Race(this.sliderValue); // Create a new
             race.setCondition(weather); // Set the weather condition
             GameFrame gameFrame = new GameFrame(horses , this.race, numHorses); // Create a new GameFrame instance
@@ -373,6 +290,7 @@ public class GuiFrame extends JFrame implements ActionListener{
         }
     }
 
+    // Simple JLabel creation method for easier jable creation
     public JLabel createLabel(String text, int x, int y , int width, int height) {
         JLabel label = new JLabel(text);
         label.setBounds(x, y, width, height);
@@ -381,6 +299,7 @@ public class GuiFrame extends JFrame implements ActionListener{
         return label;
     }
 
+    // Below are the comboBox creation methods for saddles, shoes and colours
     public JComboBox<String> saddleComboBox(int x, int y, int width, int height) {
         JComboBox<String> comboBox = new JComboBox<>(new String[]{"Normal", "Brown", "Red"});
         comboBox.setBounds(x, y, width, height);
@@ -410,20 +329,4 @@ public class GuiFrame extends JFrame implements ActionListener{
 
 
 
-}
-
-
-class RaceFrame extends JFrame {
-    public RaceFrame(int numHorses, String weather, int distance) {
-        super("Horse Race Simulation"); 
-        this.setSize(600, 400);               
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); 
-
-        
-        JLabel label = new JLabel("Race with " + numHorses + " horses, weather: " + weather + 
-                                  ", distance: " + distance + " meters");
-        this.add(label);                               
-
-       
-    }
 }

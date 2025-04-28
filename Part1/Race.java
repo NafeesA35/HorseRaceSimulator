@@ -189,7 +189,7 @@ public class Race
      * 
      * @param theHorse the horse to be moved
      */
-    public void moveHorse(Horse theHorse)
+    private void moveHorse(Horse theHorse)
     {
         //if the horse has fallen it cannot move, 
         //so only run if it has not fallen
@@ -206,13 +206,13 @@ public class Race
             //so if you double the confidence, the probability that it will fall is *2
             double FALL_FACTOR = 0;
             if(condition.equals("Rainy")){
-                FALL_FACTOR = 0.025;
+                FALL_FACTOR = 0.03;
             }else if(condition.equals("Icy")){
                 FALL_FACTOR = 0.035;
             }else if(condition.equals("Random")){
                 double random = Math.random();
                 if(random < 0.33){
-                    FALL_FACTOR = 0.025;
+                    FALL_FACTOR = 0.03;
                 }else if(random > 0.33 && random < 0.66){
                     FALL_FACTOR = 0.035;
                 }else{
@@ -249,7 +249,7 @@ public class Race
      */
     private boolean raceWonBy(Horse theHorse)
     {
-        if (theHorse.getDistanceTravelled() == raceLength)
+        if (theHorse.getDistanceTravelled() >= raceLength)
         {
             return true;
         }
@@ -407,7 +407,7 @@ public class Race
     }
 
     public boolean winner(Horse theHorse){
-        if (theHorse.getDistanceTravelled() == raceLength)
+        if (theHorse.getDistanceTravelled() >= raceLength)
         {
             return true;
         }
@@ -416,9 +416,13 @@ public class Race
             return false;
         }
     }
-
+    // Round to two decimal places
     public static double roundToTwoDecimalPlaces(double value) {
         return Math.round(value * 100.0) / 100.0;
+    }
+
+    public void moveHorseGui(Horse theHorse){
+        moveHorse(theHorse);
     }
 
 

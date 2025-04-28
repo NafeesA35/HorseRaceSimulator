@@ -9,6 +9,7 @@ import javax.swing.*;
 
 class HorsePanel extends JPanel implements ActionListener
 {
+
     Horse horse;
     final int PANEL_HEIGHT = 40;
     final int PANEL_WIDTH = 780;
@@ -19,7 +20,6 @@ class HorsePanel extends JPanel implements ActionListener
     int startY = 0;
     Race race;
     double pxRatio;
-
     GameFrame gameFrame;
 
     public HorsePanel(int x, int y, Horse horse , Race race, GameFrame frame) {
@@ -48,15 +48,16 @@ class HorsePanel extends JPanel implements ActionListener
 
     @Override
     public void actionPerformed(ActionEvent e) {
+        horse.incrementTime();
         // Update the position of the horse image
         if(horse.hasFallen()){
             startX = 0;
+            horse.incrementTotalFalls();
             timer.stop();
 
 
             System.out.println(gameFrame.numberOfHorses);
             if(gameFrame.allFallen()){
-                System.out.println("I have hit this section !");
                 gameFrame.displayLoss();
                 return;
             }
@@ -68,7 +69,7 @@ class HorsePanel extends JPanel implements ActionListener
             timer.stop();
             return;
         }else if (Race.shouldMove(horse)){
-            this.race.moveHorse(horse);
+            this.race.moveHorseGui(horse);
             if(horse.getBreed().equals("Arabian")){
                 startX = (int)(horse.getDistanceTravelled() * pxRatio);
             }else if(horse.getBreed().equals("Friesian")){
@@ -95,20 +96,7 @@ class HorsePanel extends JPanel implements ActionListener
 
     }
 
-    public int distanceToPanelEnd(int distance){
-        // MINIMUM DISTANCE IS 10
-        // MINIMUM PANEL WIDTH IS 500
-        int panelWidth = 400;
-        final int SCALE = 40;
-        for (int i = 10; i < distance; i++) {
-            panelWidth = panelWidth + SCALE;
-        }
-        return panelWidth;
-    }
-
     // We have established a 1:40 ratio between the horse image and the panel width
     // 1 horse image = 40 pixels in width
-
-    
 
 }

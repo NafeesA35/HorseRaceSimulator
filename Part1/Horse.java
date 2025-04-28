@@ -6,7 +6,7 @@ import java.util.Scanner;
  * The horse class is a representation of a horse in the simulator, consisting of attributes such as name, symbol, confidence, distance travelled, and whether it has fallen.
  * 
  * @author Nafees Ahmed
- * @version (a version number or a date)
+ * @version 28th April 2025
  */
 public class Horse
 {
@@ -22,8 +22,16 @@ public class Horse
     private String saddle = "Normal";
     private String shoe = "Normal";
 
+    // Bonuses for the GUI part.
     private int bonusSpeed = 0; // Default bonus speed
     private double bonusEndurance = 0; // Default bonus endurance
+
+    //For the stats frame only
+    private int totalWins = 0;
+    private int totalFalls = 0;
+    private int totalRaces = 0;
+    private int totalDistance = 0;
+    private int time = 0;
     
     
       
@@ -82,7 +90,7 @@ public class Horse
 
     public void moveForward()
     {
-        if(Math.random() < 0.5){
+        if(Math.random() < 0.35){
             this.distanceTravelled = this.distanceTravelled + this.bonusSpeed;
         }
         this.distanceTravelled++;
@@ -98,7 +106,7 @@ public class Horse
         this.symbol = newSymbol;
     }
 
-    
+    // Ensure confidence is between 0 and 1
     private void verifyConfidence(double confidence)
     {
         boolean valid = false;
@@ -107,7 +115,7 @@ public class Horse
         // Loop until a valid confidence value is entered
         while (!valid)
         {
-            if (newConfidence >= 0 && newConfidence <= 1)
+            if (newConfidence > 0 && newConfidence < 1)
             {
                 valid = true;
             }
@@ -185,6 +193,7 @@ public class Horse
     public String getColor() {
         return this.color;
     }
+    // Give the horse an icon based on the color, saddle and shoe.
     public void setImagePath(String pcolor, String psaddle, String pshoe) 
     {
     
@@ -205,14 +214,14 @@ public class Horse
         if (this.saddle.equals("Brown")) {
             this.bonusSpeed++;
         } else if (this.saddle.equals("Red")) {
-            this.bonusEndurance = bonusEndurance +  0.05; 
+            this.bonusEndurance = bonusEndurance +  0.03; 
         }
 
         // Shoe bonuses
         if (this.shoe.equals("Silver")) {
             this.bonusSpeed++; // Silver shoe speed boost
         } else if (this.shoe.equals("Brown")) {
-            this.bonusEndurance = bonusEndurance +  0.08;
+            this.bonusEndurance = bonusEndurance +  0.02;
         }
     }
 
@@ -222,6 +231,39 @@ public class Horse
 
     public double getBonusEndurance() {
         return this.bonusEndurance;
+    }
+
+    // STATS BASED METHODS - Self explanatory names
+
+    public void incrementTotalWins() {
+        this.totalWins++;
+    }
+    public void incrementTotalFalls() {
+        this.totalFalls++;
+    }
+    public void incrementTotalRaces() {
+        this.totalRaces++;
+    }
+    public void incrementTotalDistance(int distance) {
+        this.totalDistance += distance;
+    }
+    public int getTotalWins() {
+        return this.totalWins;
+    }
+    public int getTotalFalls() {
+        return this.totalFalls;
+    }
+    public int getTotalRaces() {
+        return this.totalRaces;
+    }
+    public int getTotalDistance() {
+        return this.totalDistance;
+    }
+    public void incrementTime() {
+        this.time++;
+    }
+    public int getTime() {
+        return this.time;
     }
 
 
