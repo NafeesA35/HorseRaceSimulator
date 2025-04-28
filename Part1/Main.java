@@ -22,7 +22,7 @@ public class Main {
             for (int i = 0; i < numberOfHorses; i++) {
                 race.addHorse(horses[i], i + 1);
                 horses[i].setName(inputString("Enter a name for the horse "));
-                horses[i].setConfidence(inputDouble("A confidence value between > ", 0, 1));
+                horses[i].setConfidence(inputDouble("A confidence value between 0 and 1 ", 0, 1));
             }
             int raceTime = inputInt("How many times do you want the race to run? (1-5) : ", 1, 5);
             for (int i =0; i < raceTime; i++){
