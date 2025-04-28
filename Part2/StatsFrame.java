@@ -1,6 +1,6 @@
 package Part2;
-import javax.swing.*;
 import Part1.Horse;
+import javax.swing.*;
 
 public class StatsFrame extends JFrame
 {

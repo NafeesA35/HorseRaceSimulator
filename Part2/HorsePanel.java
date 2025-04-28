@@ -56,7 +56,6 @@ class HorsePanel extends JPanel implements ActionListener
             timer.stop();
 
 
-            System.out.println(gameFrame.numberOfHorses);
             if(gameFrame.allFallen()){
                 gameFrame.displayLoss();
                 return;
@@ -90,7 +89,6 @@ class HorsePanel extends JPanel implements ActionListener
         }
 
 
-        System.out.println(horse.getName() + " distance travelled: " + horse.getDistanceTravelled() + " fallen ?"+horse.hasFallen());
 
         repaint();
 
